@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Sản Phẩm</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>🛠 Admin Panel</h2>
+        <ul>
+            <li data-url="../dashboard/index.html" >📊 Dashboard</li>
+            <li data-url="../seller/index.html">👨‍💼 Quản lý Người Bán</li>
+            <li data-url="../product/index.html"class="active">📦 Quản lý Sản Phẩm</li>
+            <li data-url="../order/index.html">🛒 Quản lý Đơn Hàng</li>
+            <li data-url="../user/index.html">👥 Quản lý Người Dùng</li>
+            <li data-url="../logout/index.html">🚪 Đăng xuất</li>
+        </ul>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <h1>📦 Quản lý Sản Phẩm</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Danh Mục</th>
+                        <th>Giá</th>
+                        <th>Số Lượng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Sản phẩm A</td>
+                        <td>Điện tử</td>
+                        <td>500,000 VND</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Sản phẩm B</td>
+                        <td>Thời trang</td>
+                        <td>300,000 VND</td>
+                        <td>50</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xác Nhận Thanh Toán</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Thanh điều hướng -->
+    <header class="header">
+        <div class="header-container">
+            <h1 class="logo">🐟 Hải Sản Tươi Ngon</h1>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="../Page/index.html" class="nav-link">Trang Chủ</a></li>
+                    <li><a href="#" class="nav-link">Danh Mục</a></li>
+                    <li><a href="../cart-page/index.html" class="nav-link">Giỏ Hàng</a></li>
+                    <li><a href="#" class="nav-link">Tin Tức</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="cart-icon" onclick="goToCart()">
+                    🛒 Giỏ Hàng (<span id="cart-count">0</span>)
+                </div>
+                <div class="profile-icon" onclick="redirectToProfile()">
+                    <img src="http://localhost:5000/image/default-avatar.png" alt="Avatar" id="nav-avatar">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Nội dung xác nhận -->
+    <section class="confirmation-container">
+        <h1>Đơn Hàng Đã Được Xác Nhận!</h1>
+        <p>Cảm ơn bạn đã đặt hàng tại Hải Sản Tươi Ngon. Dưới đây là thông tin đơn hàng của bạn:</p>
+        <div id="order-details"></div>
+        <p>Mã đơn hàng: <span id="order-id">ORDER-123456</span></p>
+        <p>Vui lòng kiểm tra email hoặc liên hệ qua hotline <a href="tel:02862717888">028 62 717 888</a> để theo dõi đơn hàng.</p>
+        <p><a href="../order-history-page/index.html" class="view-history-link">Xem Lịch Sử Đơn Hàng</a></p>
+        <button class="back-to-home-btn" onclick="backToHome()">Quay Về Trang Chủ</button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Về Chúng Tôi</h3>
+                <p><strong>CÔNG TY CP XNK Hải Sản</strong></p>
+                <p>Văn phòng: 254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng</p>
+                <p>ĐT: <a href="tel:02862717888">(028) 62 717 888</a></p>
+                <p>Website: <a href="https://websitefoods.com">https://websitefoods.com</a></p>
+                <p>Tel: <a href="tel:0988882722">0988 882 722</a></p>
+                <p>FB: <a href="#">seafood.vietnam</a></p>
+            </div>
+            <div class="footer-column">
+                <h3>Thông Tin</h3>
+                <p><a href="#">Chính Sách Bảo Mật</a></p>
+                <p><a href="#">Chính Sách Chung</a></p>
+                <p><a href="#">Thông Tin Công Ty</a></p>
+                <h3>Bảng Giá Hải Sản</h3>
+            </div>
+            <div class="footer-column">
+                <h3>Liên Hệ</h3>
+                <ul>
+                    <li><strong>Tư vấn mua hàng:</strong> (7:30 – 22:00)</li>
+                    <li><a href="tel:02862717888">028 62 717 888</a></li>
+                    <li><strong>Đặt hàng xuất khẩu:</strong> (8:00 – 16:30)</li>
+                    <li><a href="tel:0988882722">0988 882 722</a></li>
+                    <li><strong>Hệ thống phân phối:</strong></li>
+                    <li>Call: <a href="tel:0936013983">0936 013 983</a></li>
+                    <li><strong>Thủy nguyện:</strong></li>
+                    <li>Call: <a href="tel:0933236266">0933 236 266</a></li>
+                </ul>
+                <div class="verified-badge">
+                    <img src="http://localhost:5000/image/verified-badge.png" alt="Đã thông báo Bộ Công Thương">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<div class="dashboard">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>📦 Seller Panel Overal</h2>
+        <ul id="menu">
+            <li data-url="../dashboard/index.html"><i class="fas fa-chart-line"></i>📊 Dashboard</li>
+            <li data-url="../sell-product/index.html"><i class="fas fa-box"></i>📦 Sản phẩm</li>
+            <li data-url="../order/index.html"><i class="fas fa-shopping-cart"></i>🛒 Đơn hàng</li>
+            <li data-url="../seller-profile/index.html"><i class="fas fa-user"></i>👤 Hồ sơ</li>
+            <li data-url="logout/index.html"><i class="fas fa-sign-out-alt"></i>🚪 Đăng xuất</li>
+        </ul>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <h1>📊 Tổng quan kinh doanh</h1>
+        <div class="stats">
+            <div class="stat-box">
+                <h3>🛒 120</h3>
+                <p>Đơn hàng</p>
+            </div>
+            <div class="stat-box">
+                <h3>💰 25,000,000 VND</h3>
+                <p>Doanh thu</p>
+            </div>
+            <div class="stat-box">
+                <h3>📦 50</h3>
+                <p>Sản phẩm đang bán</p>
+            </div>
+        </div>
+
+        <h2>📦 Danh sách sản phẩm</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Ảnh</th>
+                    <th>Tên Sản Phẩm</th>
+                    <th>Giá</th>
+                    <th>Kho</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><img src="product1.jpg" alt="Sản phẩm"></td>
+                    <td>Cua Hoàng Đế</td>
+                    <td>2,500,000 VND</td>
+                    <td>20</td>
+                    <td>
+                        <button class="edit" onclick="window.location.href='edit_product.html?id=1'">✏️ Sửa</button>
+                        <button class="delete" onclick="window.location.href='delete_product.html?id=1'">🗑️ Xóa</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="product2.jpg" alt="Sản phẩm"></td>
+                    <td>Tôm Hùm</td>
+                    <td>3,200,000 VND</td>
+                    <td>15</td>
+                    <td>
+                        <button class="edit" onclick="window.location.href='edit_product.html?id=2'">✏️ Sửa</button>
+                        <button class="delete" onclick="window.location.href='delete_product.html?id=2'">🗑️ Xóa</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Gọi file JavaScript -->
+<script src="script.js"></script>
+
+</body>
+</html>

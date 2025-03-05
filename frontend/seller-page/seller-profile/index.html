@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ Sơ Người Bán</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>📦 Seller Panel</h2>
+        <ul id="menu">
+            <li data-url="../dashboard/index.html" >📊 Dashboard</li>
+            <li data-url="../sell-product/index.html">📦 Sản phẩm</li>
+            <li data-url="../order/index.html">🛒 Đơn hàng</li>
+            <li data-url="../seller-profile/index.html"class="active">👤 Hồ sơ</li>
+            <li data-url="../logout/index.html">🚪 Đăng xuất</li>
+        </ul>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <h1>👤 Hồ Sơ Của Tôi</h1>
+        <div class="profile-container">
+            <div class="profile-left">
+                <div class="profile-picture">
+                    <img src="profile.jpg" alt="Ảnh đại diện">
+                    <input type="file" id="upload-photo">
+                </div>
+                <div class="seller-stats">
+                    <p>🏅 Cấp độ: <strong>Bán chuyên</strong></p>
+                    <p>📦 Sản phẩm đã bán: <strong>320</strong></p>
+                    <p>💰 Tổng doanh thu: <strong>500,000,000 VND</strong></p>
+                </div>
+            </div>
+            
+            <div class="profile-right">
+                <label>Tên:</label>
+                <input type="text" id="name" value="Nguyễn Văn A">
+
+                <label>Email:</label>
+                <input type="email" id="email" value="seller@example.com">
+
+                <label>Số điện thoại:</label>
+                <input type="text" id="phone" value="0901234567">
+
+                <label>Địa chỉ:</label>
+                <input type="text" id="address" value="Hà Nội, Việt Nam">
+
+                <label>Mô tả ngắn:</label>
+                <textarea id="description">Chuyên cung cấp hải sản tươi sống...</textarea>
+
+                <button class="save-btn">💾 Lưu Thay Đổi</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh Toán - Hải Sản Tươi Ngon</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Thanh điều hướng -->
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../Page/index.html">Trang Chủ</a></li>
+                <li><a href="#">Cửa Hàng</a></li>
+                <li><a href="../cart-page/index.html">Giỏ Hàng</a></li>
+                <li><a href="#">Thanh Toán</a></li>
+            </ul>
+            <div class="header-icons">
+                <a href="#" class="icon"><img src="http://localhost:5000/image/icons8-shop.gif" alt="Shop"></a>
+                <a href="#" class="icon"><img src="http://localhost:5000/image/icons8-administrator-male-64.png" alt="Admin"></a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="checkout-container">
+        <!-- Danh sách sản phẩm -->
+        <section class="order-summary">
+            <h2>🛍 Đơn Hàng Của Bạn</h2>
+            <ul id="order-items">
+                <!-- Sản phẩm sẽ được thêm động bằng JavaScript -->
+            </ul>
+            <p class="total-price">Tổng tiền: <span id="total-price">0 VND</span></p>
+        </section>
+
+        <!-- Form thông tin giao hàng -->
+        <section class="shipping-info">
+            <h2>🚚 Thông Tin Giao Hàng</h2>
+            <form id="checkout-form">
+                <label for="name">Họ và Tên:</label>
+                <input type="text" id="name" required>
+
+                <label for="address">Địa Chỉ:</label>
+                <input type="text" id="address" required>
+
+                <label for="phone">Số Điện Thoại:</label>
+                <input type="text" id="phone" required>
+
+                <label for="note">Ghi Chú:</label>
+                <textarea id="note" rows="3"></textarea>
+            </form>
+        </section>
+
+        <!-- Phương thức thanh toán -->
+        <section class="payment-method">
+            <h2>💳 Phương Thức Thanh Toán</h2>
+            <label><input type="radio" name="payment" value="cod" checked> Thanh toán khi nhận hàng</label>
+            <label><input type="radio" name="payment" value="bank"> Chuyển khoản ngân hàng</label>
+        </section>
+
+        <button class="checkout-btn" onclick="confirmOrder()">✅ Xác Nhận Thanh Toán</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-column">
+            <h3>Về Chúng Tôi</h3>
+            <p><strong>CÔNG TY CP XNK seafood</strong></p>
+            <p>Văn phòng: 254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng</p>
+            <p>ĐT: <a href="tel:02862717888">(028) 62 717 888</a></p>
+            <p>Website: <a href="https://websitefoods.com">https://websitefoods.com</a></p>
+            <p>Tel: <a href="tel:0988882722">0988 882 722</a></p>
+            <p>FB: <a href="#">seafood.vietnam</a></p>
+        </div>
+        <div class="footer-column">
+            <h3>Thông Tin</h3>
+            <p><a href="#">CHÍNH SÁCH BẢO MẬT THÔNG TIN</a></p>
+            <p><a href="#">CHÍNH SÁCH CHUNG</a></p>
+            <p><a href="#">THÔNG TIN CÔNG TY</a></p>
+        </div>
+        <div class="footer-column">
+            <h3>Liên Hệ</h3>
+            <ul>
+                <li><strong>Tư vấn mua hàng:</strong> (7:30 – 22:00)</li>
+                <li><a href="tel:02862717888">028 62 717 888</a></li>
+                <li><strong>Đặt hàng xuất khẩu:</strong> (8:00 – 16:30)</li>
+                <li><a href="tel:0988882722">0988 882 722</a></li>
+                <li><strong>Hệ thống phân phối:</strong></li>
+                <li>Call: <a href="tel:0936013983">0936 013 983</a></li>
+                <li><strong>Thủy nguyện:</strong></li>
+                <li>Call: <a href="tel:0933236266">0933 236 266</a></li>
+            </ul>
+            <div class="verified-badge">
+                <img src="http://localhost:5000/image/verified-badge.png" alt="Đã thông báo Bộ Công Thương">
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+</html>

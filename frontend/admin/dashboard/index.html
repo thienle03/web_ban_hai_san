@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="dashboard">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>🛠 Admin Panel</h2>
+        <ul>
+            <li data-url="../dashboard/index.html" class="active">📊 Dashboard</li>
+            <li data-url="../seller/index.html">👨‍💼 Quản lý Người Bán</li>
+            <li data-url="../product/index.html">📦 Quản lý Sản Phẩm</li>
+            <li data-url="../order/index.html">🛒 Quản lý Đơn Hàng</li>
+            <li data-url="../user/index.html">👥 Quản lý Người Dùng</li>
+            <li data-url="../logout/index.html">🚪 Đăng xuất</li>
+        </ul>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <h1>📊 Tổng quan hệ thống</h1>
+        
+        <div class="stats">
+            <div class="card">👥 <strong>500</strong> Người dùng</div>
+            <div class="card">👨‍💼 <strong>50</strong> Người bán</div>
+            <div class="card">📦 <strong>1,200</strong> Sản phẩm</div>
+            <div class="card">🛒 <strong>3,000</strong> Đơn hàng</div>
+            <div class="card">💰 <strong>2,500,000,000 VND</strong> Doanh thu</div>
+        </div>
+
+        <h2>📈 Biểu đồ Doanh thu</h2>
+        <canvas id="revenueChart"></canvas>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

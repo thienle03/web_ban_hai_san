@@ -1,0 +1,167 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* h1 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+} */
+
+.posted-date {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.image-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.image-container img {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%; /* Để hình ảnh không bị vỡ khi thu nhỏ */
+    width: 60%;
+    height: auto;
+}
+
+h2 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+
+/* Header */
+header {
+    background-image: url('https://titiseamarket.vn/wp-content/uploads/2021/10/hai-san-banner-1-1024x535.jpg');
+    background-color: #007bff;
+    background-size: cover;  /* Ensure the image covers the header area */
+    background-repeat: no-repeat;
+    background-position: center;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    
+}
+
+.logo {
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    max-width: 110px; /* Adjust based on your logo size */
+    height: auto;
+}
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+
+/**/
+.footer {
+    display: flex;
+    justify-content: space-between;
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    flex-wrap: wrap;
+    
+}
+
+.footer-column {
+    text-align: center;
+    width: 30%;
+}
+
+.footer-column h3 {
+    border-bottom: 2px solid #ff6600;
+    padding-bottom: 5px;
+}
+
+.footer a {
+    color: #ffcc00;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+.social-icons img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.verified-badge img {
+    width: 120px;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-column {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}

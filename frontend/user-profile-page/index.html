@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ Sơ Người Dùng</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>👤 Hồ Sơ Người Dùng</h1>
+    </header>
+
+    <div class="profile-container">
+        <div class="avatar">
+            <img id="profile-avatar" src="http://localhost:5000/uploads/default-avatar.png" alt="Avatar">
+    <input type="file" id="avatar-upload" accept="image/*">
+    <label for="avatar-upload">📷</label>
+</div>
+
+        <div class="info">
+            <label>Họ và Tên:</label>
+            <input type="text" id="full-name" placeholder="Nhập họ tên">
+
+            <label>Email:</label>
+            <input type="email" id="email" placeholder="Nhập email">
+
+            <label>Số Điện Thoại:</label>
+            <input type="text" id="phone" placeholder="Nhập số điện thoại">
+
+            <label>Địa Chỉ:</label>
+            <input type="text" id="address" placeholder="Nhập địa chỉ">
+
+            <button onclick="saveProfile()">Lưu Thông Tin</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

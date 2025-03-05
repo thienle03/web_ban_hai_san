@@ -1,0 +1,130 @@
+/* Định dạng chung */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #2c3e50;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 22px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+.sidebar ul li:hover {
+    background: #1abc9c;
+    border-radius: 5px;
+}
+.sidebar ul .active {
+    background: #1abc9c;
+    border-radius: 5px;
+}
+
+/* Content */
+.content {
+    margin-left: 270px;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 28px;
+    color: #2c3e50;
+    margin-bottom: 20px;
+}
+
+/* Bảng đơn hàng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 14px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    font-size: 15px;
+}
+
+th {
+    background: #34495e;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+tr:hover {
+    background: #f8f9fa;
+}
+
+/* Trạng thái đơn hàng */
+.pending {
+    color: #f39c12;
+    font-weight: bold;
+}
+
+.shipping {
+    color: #3498db;
+    font-weight: bold;
+}
+
+.delivered {
+    color: #2ecc71;
+    font-weight: bold;
+}
+
+/* Nút thao tác */
+button {
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-right: 5px;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.detail-btn {
+    background: #3498db;
+    color: white;
+}
+
+.cancel-btn {
+    background: #e74c3c;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.8;
+}

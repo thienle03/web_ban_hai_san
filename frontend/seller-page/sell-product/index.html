@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Bán Hải Sản | Seller Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard">
+        <div class="sidebar">
+            <h2 class="sidebar-title">📦 Seller Panel</h2>
+            <ul id="menu">
+                <li data-url="../dashboard/index.html">📊 Dashboard</li>
+                <li data-url="index.html" class="active">📦 Sản Phẩm</li>
+                <li data-url="../order/index.html">🛒 Đơn Hàng</li>
+                <li data-url="../seller-profile/index.html">👤 Hồ Sơ</li>
+                <li data-url="../logout/index.html">🚪 Đăng Xuất</li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h1 class="content-title">🦞 Đăng Bán Hải Sản</h1>
+            
+            <form id="sellForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="productName">Tên sản phẩm:</label>
+                    <input type="text" id="productName" name="name" placeholder="Nhập tên sản phẩm" required>
+                </div>
+                <div class="form-group">
+                    <label for="productPrice">Giá (VND):</label>
+                    <input type="number" id="productPrice" name="price" placeholder="Nhập giá" required>
+                </div>
+                <div class="form-group">
+                    <label for="productQuantity">Số lượng tồn:</label>
+                    <input type="number" id="productQuantity" name="stock" placeholder="Nhập số lượng" required>
+                </div>
+                <div class="form-group">
+                    <label for="productCategory">Danh mục:</label>
+                    <select id="productCategory" name="category" required>
+                        <option value="">Chọn danh mục</option>
+                        <option value="tôm">Tôm</option>
+                        <option value="cua">Cua</option>
+                        <option value="mực">Mực</option>
+                        <option value="sò">Sò</option>
+                        <option value="cá">Cá</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="productDescription">Mô tả:</label>
+                    <textarea id="productDescription" name="description" placeholder="Nhập mô tả sản phẩm" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="productOrigin">Xuất xứ:</label>
+                    <input type="text" id="productOrigin" name="origin" placeholder="Nhập xuất xứ (VD: Vùng biển miền Trung)">
+                </div>
+                <div class="form-group">
+                    <label for="productStorage">Cách bảo quản:</label>
+                    <input type="text" id="productStorage" name="storage" placeholder="Nhập cách bảo quản (VD: Làm lạnh 0-4°C)">
+                </div>
+                <div class="form-group">
+                    <label for="productWeight">Trọng lượng:</label>
+                    <input type="text" id="productWeight" name="weight" placeholder="Nhập trọng lượng (VD: 500g - 1kg/con)">
+                </div>
+                <div class="form-group">
+                    <label for="productImage">Hình ảnh chính:</label>
+                    <input type="file" id="productImage" name="imageUrl" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <label for "productImage1">Ảnh 1 (Thumbnail):</label>
+                    <input type="file" id="productImage1" name="imageUrl1" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label for="productImage2">Ảnh 2 (Thumbnail):</label>
+                    <input type="file" id="productImage2" name="imageUrl2" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label for="productImage3">Ảnh 3 (Thumbnail):</label>
+                    <input type="file" id="productImage3" name="imageUrl3" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label for="productIllustration">Hình ảnh minh họa:</label>
+                    <input type="file" id="productIllustration" name="illustrationUrl" accept="image/*">
+                </div>
+                <button type="submit" class="submit-btn">Thêm Sản Phẩm</button>
+            </form>
+
+            <h2 class="product-list-title">📋 Danh Sách Sản Phẩm Đã Đăng</h2>
+            <div class="product-table-container">
+                <table class="product-table">
+                    <thead>
+                        <tr>
+                            <th>Ảnh</th>
+                            <th>Tên Sản Phẩm</th>
+                            <th>Giá</th>
+                            <th>Số Lượng</th>
+                            <th>Danh Mục</th>
+                            <th>Xuất Xứ</th>
+                            <th>Bảo Quản</th>
+                            <th>Trọng Lượng</th>
+                            <th>Hành Động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="productList"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

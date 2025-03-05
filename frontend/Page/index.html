@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seafood Store | Trang Chủ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Thanh điều hướng -->
+    <header>
+        <h1>🐟 Hải Sản Tươi Ngon</h1>
+        <img src="image/d6b89ee4-55bc-4467-a0a7-f096fdcf589b.jpg" alt="Logo" class="logo">
+        <nav>
+            <ul>
+                <li><a href="../Page/index.html">Danh Mục Sản Phẩm</a></li>
+                <li><a href="../gioithieu/index.html">Giới Thiệu</a></li>
+                <li><a href="../cuahang/index.html">Cửa Hàng</a></li>
+                <li><a href="../news/tintuc/index.html">Tin Tức</a></li>
+            </ul>
+            <div class="cart-icon" onclick="toggleCart()">
+                🛒 Giỏ Hàng (<span id="cart-count">0</span>)
+            </div>
+            <div class="profile-icon" onclick="redirectToProfile()">
+                <img src="http://localhost:5000/uploads/default-avatar.png" alt="Avatar" id="nav-avatar">
+            </div>
+        </nav>
+    </header>
+
+    <!-- Section Hải Sản Mới -->
+    <section class="products">
+        <h2 class="section-title">Hải Sản Mới</h2>
+        <div class="product-list" id="new-products">
+            <!-- Sản phẩm mới sẽ được tải động từ backend -->
+        </div>
+        <div class="button-container">
+            <button class="load-more-btn" id="loadMoreNew" onclick="loadMoreProducts()">Xem thêm</button>
+            <button class="load-more-btn" id="collapseNew" onclick="collapseProducts()" style="display: none;">Thu gọn</button>
+        </div>
+    </section>
+
+    <!-- Section Sản Phẩm Nổi Bật -->
+    <section class="featured-products">
+        <h2 class="section-title">🔥 Sản Phẩm Nổi Bật</h2>
+        <div class="product-categories">
+            <button class="category" onclick="filterProducts('tom')">Tôm</button>
+            <button class="category" onclick="filterProducts('cua')">Cua</button>
+            <button class="category" onclick="filterProducts('muc')">Mực</button>
+            <button class="category" onclick="filterProducts('so')">Sò</button>
+            <button class="category" onclick="filterProducts('ca')">Cá</button>
+            <button class="category" onclick="filterProducts('all')">Tất Cả</button>
+        </div>
+        <div class="product-list" id="featured-products">
+            <div class="product" data-id="tom1" onclick="redirectToProductDetail('tom1')">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY5MTioRkIzlLpxcSiXNFFulOr3Q5pA0BJbQ&s" alt="Tôm Càng Xanh">
+                <h3>Tôm Càng Xanh</h3>
+                <p><del>250.000 VND</del> <strong>230.000 VND</strong></p>
+                <div class="buttons">
+                    <button class="add-to-cart" onclick="addToCart('Tôm Càng Xanh', 230000, 'tom1')">🛒</button>
+                    <button class="buy-now" onclick="redirectToProductDetail('tom1')">Mua Ngay</button>
+                </div>
+            </div>
+            <div class="product" data-id="cua1" onclick="redirectToProductDetail('cua1')">
+                <img src="https://haisan.online/wp-content/uploads/2021/11/cua-bien-13.jpg" alt="Cua Biển">
+                <h3>Cua Biển</h3>
+                <p><del>550.000 VND</del> <strong>500.000 VND</strong></p>
+                <div class="buttons">
+                    <button class="add-to-cart" onclick="addToCart('Cua Biển', 500000, 'cua1')">🛒</button>
+                    <button class="buy-now" onclick="redirectToProductDetail('cua1')">Mua Ngay</button>
+                </div>
+            </div>
+            <!-- Các sản phẩm khác giữ nguyên, chỉ cần thêm `data-id` và `onclick` tương tự -->
+        </div>
+        <button class="load-more-btn" id="loadMoreFeatured" onclick="loadMoreFeaturedProducts()">Xem thêm</button>
+    </section>
+
+    <!-- Giỏ hàng (Chỉ giữ một cart-container duy nhất) -->
+    <div class="cart-container" id="cart-container" style="display: none;">
+        <h3>🛒 Giỏ Hàng</h3>
+        <ul id="cart-items"></ul>
+        <p><strong>Tổng tiền: </strong><span id="cart-total">0</span> VND</p>
+        <button onclick="clearCart()">Xóa Giỏ Hàng</button>
+        <button onclick="toggleCart()">Đóng</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-column">
+            <h3>Về Chúng Tôi</h3>
+            <p><strong>CÔNG TY CP XNK seafood</strong></p>
+            <p>Văn phòng: 254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng</p>
+            <p>ĐT: <a href="tel:02862717888">(028) 62 717 888</a></p>
+            <p>Website: <a href="https://websitefoods.com">https://websitefoods.com</a></p>
+            <p>Tel: <a href="tel:0988882722">0988 882 722</a></p>
+            <p>FB: <a href="#">seafood.vietnam</a></p>
+        </div>
+        <div class="footer-column">
+            <h3>Thông Tin</h3>
+            <p><a href="#">CHÍNH SÁCH BẢO MẬT THÔNG TIN</a></p>
+            <p><a href="#">CHÍNH SÁCH CHUNG</a></p>
+            <p><a href="#">THÔNG TIN CÔNG TY</a></p>
+            <h3>Bảng giá Hải Sản seafood:</h3>
+        </div>
+        <div class="footer-column">
+            <h3>Liên Hệ</h3>
+            <ul>
+                <li><strong>Tư vấn mua hàng:</strong> (7:30 – 22:00)</li>
+                <li><a href="tel:02862717888">028 62 717 888</a></li>
+                <li><strong>Đặt hàng xuất khẩu:</strong> (8:00 – 16:30)</li>
+                <li><a href="tel:0988882722">0988 882 722</a></li>
+                <li><strong>Hệ thống phân phối:</strong></li>
+                <li>Call: <a href="tel:0936013983">0936 013 983</a></li>
+                <li><strong>Thủy nguyện:</strong></li>
+                <li>Call: <a href="tel:0933236266">0933 236 266</a></li>
+            </ul>
+            <div class="verified-badge">
+                <img src="http://localhost:5000/uploads/verified-badge.png" alt="Đã thông báo Bộ Công Thương">
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

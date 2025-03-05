@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cửa Hàng</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header class="fixed-header">
+        <div class="header-container">
+            <h1>🐟 Giới Thiệu Về Hải Sản Tươi Ngon</h1>
+            <nav>
+                <ul>
+                    <li><a href="../Page/index.html">Trang Chủ</a></li>
+                    <li><a href="#">Giới Thiệu</a></li>
+                    <li><a href="../cuahang/index.html">Cửa Hàng</a></li>
+                    <li><a href="contact.html">Liên Hệ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Danh Mục</h2>
+            <ul id="category-list">
+                <li onclick="filterProducts('all')">Tất Cả</li>
+                <li onclick="filterProducts('Tôm hùm')">Tôm Hùm</li>
+                <li onclick="filterProducts('Cua và Ghẹ')">Cua & Ghẹ</li>
+                <li onclick="filterProducts('Cá biển')">Cá Biển</li>
+                <li onclick="filterProducts('Mực và Bạch Tuộc')">Mực & Bạch Tuộc</li>
+                <li onclick="filterProducts('Sò và Ốc')">Sò & Ốc</li>
+            </ul>
+        </aside>
+
+        <main class="products">
+            <div class="filter">
+                <label for="sort">Sắp xếp:</label>
+                <select id="sort" onchange="sortProducts()">
+                    <option value="latest">Mới Nhất</option>
+                    <option value="low-to-high">Giá: Thấp đến Cao</option>
+                    <option value="high-to-low">Giá: Cao đến Thấp</option>
+                </select>
+            </div>
+
+            <div class="product-list" id="product-list">
+                <!-- Sản phẩm sẽ được load bằng JavaScript -->
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,364 @@
+let cartCount = 0;
+let cartContainer = document.getElementById("cart-container");
+let cartCountElement = document.getElementById("cart-count");
+let cartItems = document.getElementById("cart-items");
+let cartTotal = document.getElementById("cart-total");
+
+let currentPageNew = 1; // Trang hiện tại cho "Hải Sản Mới"
+let currentPageFeatured = 1; // Trang hiện tại cho "Sản Phẩm Nổi Bật"
+const initialNewProducts = 10; // Hiển thị 10 sản phẩm đầu tiên
+const midNewProducts = 20; // Hiển thị 20 sản phẩm sau lần nhấn "Xem thêm" đầu tiên
+const additionalNewProducts = 5; // Hiển thị thêm 5 sản phẩm mỗi lần nhấn "Xem thêm" sau 20 sản phẩm
+const minNewProducts = 5; // Hiển thị 5 sản phẩm khi thu gọn
+const itemsPerPageFeatured = 5; // Số sản phẩm mỗi lần tải cho "Sản Phẩm Nổi Bật"
+
+// Hàm tải sản phẩm mới từ backend với giới hạn 10 sản phẩm ban đầu
+async function loadNewProducts() {
+    try {
+        const response = await fetch('http://localhost:5000/api/products/new');
+        if (!response.ok) throw new Error('Lỗi khi tải sản phẩm');
+        const newProducts = await response.json();
+
+        const productList = document.getElementById('new-products');
+        productList.innerHTML = ''; // Xóa danh sách cũ
+
+        const initialProducts = newProducts.slice(0, initialNewProducts); // Chỉ lấy 10 sản phẩm đầu tiên
+        initialProducts.forEach(product => {
+            const productDiv = document.createElement('div');
+            productDiv.className = 'product';
+            productDiv.setAttribute('data-id', product._id); // Thêm ID sản phẩm
+            productDiv.setAttribute('onclick', `redirectToProductDetail('${product._id}')`); // Thêm sự kiện onclick
+            productDiv.innerHTML = `
+                <img src="http://localhost:5000${product.imageUrl}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>Giá: ${product.price.toLocaleString()} VND/kg</p>
+                <div class="buttons">
+                    <button class="add-to-cart" onclick="addToCart('${product.name}', ${product.price}, '${product._id}')">🛒</button>
+                    <button class="buy-now" onclick="redirectToProductDetail('${product._id}')">Mua Ngay</button>
+                </div>
+            `;
+            productList.appendChild(productDiv);
+        });
+
+        // Hiển thị nút "Xem thêm" nếu có hơn 10 sản phẩm, và nút "Thu gọn" nếu có hơn 5 sản phẩm
+        const loadMoreBtn = document.getElementById('loadMoreNew');
+        const collapseBtn = document.getElementById('collapseNew');
+        loadMoreBtn.style.display = (newProducts.length > initialNewProducts) ? 'block' : 'none';
+        collapseBtn.style.display = (initialNewProducts > minNewProducts) ? 'block' : 'none';
+    } catch (error) {
+        console.error('Lỗi khi tải sản phẩm mới:', error);
+    }
+}
+
+// Hàm tải thêm sản phẩm mới khi nhấn "Xem thêm"
+async function loadMoreProducts() {
+    try {
+        const response = await fetch('http://localhost:5000/api/products/new');
+        if (!response.ok) throw new Error('Lỗi khi tải sản phẩm');
+        const newProducts = await response.json();
+
+        const productList = document.getElementById('new-products');
+        const currentProductsCount = productList.children.length;
+
+        let nextProducts;
+        if (currentProductsCount < midNewProducts) {
+            nextProducts = newProducts.slice(currentProductsCount, midNewProducts);
+        } else {
+            nextProducts = newProducts.slice(currentProductsCount, currentProductsCount + additionalNewProducts);
+        }
+
+        nextProducts.forEach(product => {
+            const productDiv = document.createElement('div');
+            productDiv.className = 'product';
+            productDiv.setAttribute('data-id', product._id); // Thêm ID sản phẩm
+            productDiv.setAttribute('onclick', `redirectToProductDetail('${product._id}')`); // Thêm sự kiện onclick
+            productDiv.innerHTML = `
+                <img src="http://localhost:5000${product.imageUrl}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>Giá: ${product.price.toLocaleString()} VND/kg</p>
+                <div class="buttons">
+                    <button class="add-to-cart" onclick="addToCart('${product.name}', ${product.price}, '${product._id}')">🛒</button>
+                    <button class="buy-now" onclick="redirectToProductDetail('${product._id}')">Mua Ngay</button>
+                </div>
+            `;
+            productList.appendChild(productDiv);
+        });
+
+        // Cập nhật nút "Xem thêm" và "Thu gọn"
+        const loadMoreBtn = document.getElementById('loadMoreNew');
+        const collapseBtn = document.getElementById('collapseNew');
+        loadMoreBtn.style.display = (productList.children.length < newProducts.length) ? 'block' : 'none';
+        collapseBtn.style.display = (productList.children.length > minNewProducts) ? 'block' : 'none';
+    } catch (error) {
+        console.error('Lỗi khi tải thêm sản phẩm mới:', error);
+    }
+}
+
+// Hàm thu gọn về 5 sản phẩm đầu tiên
+async function collapseProducts() {
+    try {
+        const response = await fetch('http://localhost:5000/api/products/new');
+        if (!response.ok) throw new Error('Lỗi khi tải sản phẩm');
+        const newProducts = await response.json();
+
+        const productList = document.getElementById('new-products');
+        productList.innerHTML = ''; // Xóa danh sách cũ
+
+        const collapsedProducts = newProducts.slice(0, minNewProducts); // Chỉ lấy 5 sản phẩm đầu tiên
+        collapsedProducts.forEach(product => {
+            const productDiv = document.createElement('div');
+            productDiv.className = 'product';
+            productDiv.setAttribute('data-id', product._id); // Thêm ID sản phẩm
+            productDiv.setAttribute('onclick', `redirectToProductDetail('${product._id}')`); // Thêm sự kiện onclick
+            productDiv.innerHTML = `
+                <img src="http://localhost:5000${product.imageUrl}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p>Giá: ${product.price.toLocaleString()} VND/kg</p>
+                <div class="buttons">
+                    <button class="add-to-cart" onclick="addToCart('${product.name}', ${product.price}, '${product._id}')">🛒</button>
+                    <button class="buy-now" onclick="redirectToProductDetail('${product._id}')">Mua Ngay</button>
+                </div>
+            `;
+            productList.appendChild(productDiv);
+        });
+
+        // Cập nhật nút "Xem thêm" và "Thu gọn"
+        const loadMoreBtn = document.getElementById('loadMoreNew');
+        const collapseBtn = document.getElementById('collapseNew');
+        loadMoreBtn.style.display = (newProducts.length > minNewProducts) ? 'block' : 'none';
+        collapseBtn.style.display = 'none';
+    } catch (error) {
+        console.error('Lỗi khi thu gọn sản phẩm:', error);
+    }
+}
+
+// Hàm tải sản phẩm nổi bật từ backend với phân trang
+async function loadMoreFeaturedProducts(page = 1) {
+    try {
+        const response = await fetch(`http://localhost:5000/api/products/featured?page=${page}&limit=${itemsPerPageFeatured}`);
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}, message: ${await response.text()}`);
+        const { products, total } = await response.json();
+
+        const productList = document.getElementById('featured-products');
+        products.forEach(product => {
+            const productDiv = document.createElement('div');
+            productDiv.className = 'product';
+            productDiv.setAttribute('data-id', product._id); // Thêm ID sản phẩm
+            productDiv.setAttribute('onclick', `redirectToProductDetail('${product._id}')`); // Thêm sự kiện onclick
+            productDiv.setAttribute('data-category', product.category || 'all');
+            productDiv.innerHTML = `
+                <img src="http://localhost:5000${product.imageUrl}" alt="${product.name}">
+                <h3>${product.name}</h3>
+                <p><del>${(product.price + 20000).toLocaleString()} VND</del> <strong>${product.price.toLocaleString()} VND</strong></p>
+                <div class="buttons">
+                    <button class="add-to-cart" onclick="addToCart('${product.name}', ${product.price}, '${product._id}')">🛒</button>
+                    <button class="buy-now" onclick="redirectToProductDetail('${product._id}')">Mua Ngay</button>
+                </div>
+            `;
+            productList.appendChild(productDiv);
+        });
+
+        // Ẩn nút "Xem thêm" nếu không còn sản phẩm
+        document.getElementById('loadMoreFeatured').style.display = (page * itemsPerPageFeatured >= total) ? 'none' : 'block';
+    } catch (error) {
+        console.error('Lỗi khi tải sản phẩm nổi bật:', error);
+        alert(`Lỗi khi tải sản phẩm nổi bật: ${error.message}`);
+    }
+}
+
+// Hàm lọc sản phẩm nổi bật
+function filterProducts(category) {
+    const products = document.querySelectorAll('#featured-products .product');
+    products.forEach(product => {
+        const productCategory = product.getAttribute('data-category');
+        product.style.display = (category === 'all' || productCategory === category) ? 'flex' : 'none';
+    });
+}
+
+// Hàm chuyển hướng đến trang chi tiết sản phẩm với dữ liệu
+function redirectToProductDetail(productId) {
+    if (productId) {
+        // Truyền ID sản phẩm qua URL query
+        
+        window.location.href = `../product-delist/index.html?id=${productId}`;
+    } else {
+        window.location.href = "../product-delist/index.html";
+    }
+}
+
+// Thêm sản phẩm vào giỏ hàng từ server
+async function addToCart(name, price, productId) {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert("Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng!");
+            return;
+        }
+
+        const response = await fetch('http://localhost:5000/api/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify({
+                productId: productId,
+                quantity: 1 // Mặc định thêm 1 sản phẩm
+            })
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.message || 'Không thể thêm sản phẩm vào giỏ hàng!');
+        }
+
+        const data = await response.json();
+        alert(`Đã thêm ${quantity} ${name} vào giỏ hàng!`);
+        location.reload();
+        setTimeout(() => {
+            window.location.href = '../cart-page/index.html';
+        }, 100); //
+        await updateCart(); // Cập nhật giỏ hàng ngay lập tức
+    } catch (error) {
+        console.error('Lỗi khi thêm vào giỏ hàng:', error);
+        alert(`Lỗi: ${error.message}`);
+    }
+}
+
+// Cập nhật và hiển thị giỏ hàng từ server
+async function updateCart() {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            console.log('Chưa đăng nhập, không tải giỏ hàng.');
+            cartCountElement.textContent = '0';
+            cartContainer.style.display = 'none';
+            return;
+        }
+
+        const response = await fetch('http://localhost:5000/api/cart', {
+            headers: { 'Authorization': 'Bearer ' + token }
+        });
+        if (!response.ok) throw new Error('Không thể tải giỏ hàng!');
+        const cart = await response.json();
+
+        cartItems.innerHTML = '';
+        let totalPrice = 0;
+
+        if (cart.items.length === 0) {
+            cartItems.innerHTML = '<li>Giỏ hàng trống!</li>';
+            cartContainer.classList.add('empty');
+            cartContainer.style.display = 'block'; // Hiển thị khi trống
+        } else {
+            cartContainer.classList.remove('empty');
+            cart.items.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    ${item.productId.name} - ${item.quantity} x ${item.productId.price.toLocaleString()} VND
+                    <button onclick="removeFromCart('${item.productId._id}')">❌</button>
+                `;
+                cartItems.appendChild(li);
+                totalPrice += item.productId.price * item.quantity;
+            });
+            cartContainer.style.display = 'block';
+        }
+
+        cartCount = cart.items.reduce((total, item) => total + item.quantity, 0);
+        cartCountElement.textContent = cartCount;
+        cartTotal.textContent = totalPrice.toLocaleString();
+    } catch (error) {
+        console.error('Lỗi khi tải giỏ hàng:', error);
+        alert('Có lỗi khi tải giỏ hàng: ' + error.message);
+        cartCountElement.textContent = '0';
+        cartContainer.style.display = 'none';
+    }
+}
+
+// Xóa sản phẩm khỏi giỏ hàng từ server
+async function removeFromCart(productId) {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert("Vui lòng đăng nhập để xóa sản phẩm!");
+            return;
+        }
+
+        const response = await fetch(`http://localhost:5000/api/cart/remove/${productId}`, {
+            method: 'DELETE',
+            headers: { 'Authorization': 'Bearer ' + token }
+        });
+        if (!response.ok) throw new Error('Không thể xóa sản phẩm!');
+        await updateCart(); // Cập nhật giỏ hàng sau khi xóa
+    } catch (error) {
+        console.error('Lỗi khi xóa sản phẩm:', error);
+        alert('Có lỗi khi xóa sản phẩm: ' + error.message);
+    }
+}
+
+// Xóa toàn bộ giỏ hàng từ server
+async function clearCart() {
+    try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            alert("Vui lòng đăng nhập để xóa giỏ hàng!");
+            return;
+        }
+
+        const response = await fetch('http://localhost:5000/api/cart/clear', {
+            method: 'DELETE',
+            headers: { 'Authorization': 'Bearer ' + token }
+        });
+        if (!response.ok) throw new Error('Không thể xóa giỏ hàng!');
+        await updateCart(); // Cập nhật giỏ hàng sau khi xóa
+    } catch (error) {
+        console.error('Lỗi khi xóa giỏ hàng:', error);
+        alert('Có lỗi khi xóa giỏ hàng: ' + error.message);
+    }
+}
+
+// Hiện/Ẩn giỏ hàng
+function toggleCart() {
+    cartContainer.style.display = cartContainer.style.display === "block" ? "none" : "block";
+}
+
+// Chuyển đến trang profile
+function redirectToProfile() {
+    window.location.href = "../user-profile-page/index.html";
+}
+
+// Tải avatar người dùng
+async function loadProfileAvatar() {
+    const API_URL = "http://localhost:5000/api/user";
+    const token = localStorage.getItem("token");
+
+    if (!token) return;
+
+    try {
+        const response = await fetch(`${API_URL}/profile`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${token}`,
+            },
+        });
+
+        const user = await response.json();
+
+        if (response.ok) {
+            const avatarPath = user.avatar
+                ? `http://localhost:5000${user.avatar}`
+                : "http://localhost:5000/uploads/default-avatar.png";
+            document.getElementById("nav-avatar").src = avatarPath;
+        }
+    } catch (error) {
+        console.error("Lỗi khi tải avatar:", error);
+    }
+}
+
+// Sự kiện khi trang tải xong
+document.addEventListener("DOMContentLoaded", async function () {
+    loadNewProducts(); // Tải 10 sản phẩm đầu tiên cho "Hải Sản Mới"
+    loadMoreFeaturedProducts(1); // Tải 5 sản phẩm đầu tiên cho "Sản Phẩm Nổi Bật"
+    await updateCart(); // Tải giỏ hàng từ server
+    loadProfileAvatar(); // Tải avatar
+});

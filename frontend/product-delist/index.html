@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi Tiết Sản Phẩm | Hải Sản Tươi Ngon</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Thanh điều hướng -->
+    <header class="header">
+        <div class="header-container">
+            <h1 class="logo">🐟 Hải Sản Tươi Ngon</h1>
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="../Page/index.html" class="nav-link">Trang Chủ</a></li>
+                    <li><a href="../Page/index.html" class="nav-link">Danh Mục</a></li>
+                    <li><a href="#" class="nav-link">Cửa Hàng</a></li>
+                    <li><a href="../news/tintuc/index.html" class="nav-link">Tin Tức</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="cart-icon" onclick="goToCart()">
+                    🛒 Giỏ Hàng (<span id="cart-count">0</span>)
+                </div>
+                <div class="profile-icon" onclick="redirectToProfile()">
+                    <img src="http://localhost:5000/uploads/default-avatar.png" alt="Avatar" id="nav-avatar">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="../Page/index.html">Trang Chủ</a> > <span>Chi Tiết Sản Phẩm</span>
+    </div>
+
+    <!-- Chi tiết sản phẩm -->
+    <section class="product-details">
+        <div class="product-container">
+            <div class="product-image">
+                <img id="product-img" src="" alt="Tôm Tươi" class="main-image">
+                <div class="image-thumbnails">
+                    <img src="" alt="Ảnh 1" class="thumbnail" onclick="changeMainImage(this.src)">
+                    <img src="" alt="Ảnh 2" class="thumbnail" onclick="changeMainImage(this.src)">
+                    <img src="" alt="Ảnh 3" class="thumbnail" onclick="changeMainImage(this.src)">
+                </div>
+            </div>
+            <div class="product-info">
+                <h2 id="product-title" class="product-title">Tôm Tươi</h2>
+                <p id="product-description" class="product-description">Tôm tươi được đánh bắt từ vùng biển sạch, đảm bảo chất lượng, tươi ngon mỗi ngày.</p>
+                <p class="product-price">Giá: <span id="product-price" class="new-price"><strong>250.000 VND/kg</strong></span> <span class="old-price"><del>300.000 VND/kg</del></span></p>
+                <div class="quantity-selector">
+                    <label for="quantity">Số lượng:</label>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1" class="quantity-input">
+                </div>
+                <button id="add-to-cart" class="add-to-cart-btn">Thêm vào giỏ hàng</button>
+                <div class="share-icons">
+                    <span>Chia sẻ: </span>
+                    <a href="#" class="social-icon">🐦</a>
+                    <a href="#" class="social-icon">📷</a>
+                    <a href="#" class="social-icon">👨‍💻</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thông tin bổ sung -->
+    <section class="additional-info">
+        <h2>Thông Tin Bổ Sung</h2>
+        <ul>
+            <li><strong>Xuất xứ:</strong> <span id="product-origin">Không có</span></li>
+            <li><strong>Cách bảo quản:</strong> <span id="product-storage">Không có</span></li>
+            <li><strong>Trọng lượng:</strong> <span id="product-weight">Không có</span></li>
+        </ul>
+        <img src="" alt="Hình ảnh minh họa hải sản" class="info-image">
+    </section>
+
+    <!-- Sản phẩm liên quan -->
+    <section class="related-products">
+        <h2 class="section-title">Sản Phẩm Liên Quan</h2>
+        <div class="product-list">
+            <div class="product-card" onclick="redirectToProductDetail('fish1')">
+                <img src="https://source.unsplash.com/200x200/?fish" alt="Cá Biển">
+                <h3>Cá Biển</h3>
+                <p>Giá: <strong>180.000 VND/kg</strong></p>
+                <button class="buy-now-btn">Mua Ngay</button>
+            </div>
+            <div class="product-card" onclick="redirectToProductDetail('crab1')">
+                <img src="https://source.unsplash.com/200x200/?crab" alt="Cua Biển">
+                <h3>Cua Biển</h3>
+                <p>Giá: <strong>320.000 VND/kg</strong></p>
+                <button class="buy-now-btn">Mua Ngay</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>Về Chúng Tôi</h3>
+                <p><strong>CÔNG TY CP XNK Hải Sản</strong></p>
+                <p>Văn phòng: 254 Nguyễn Văn Linh, Thanh Khê, Đà Nẵng</p>
+                <p>ĐT: <a href="tel:02862717888">(028) 62 717 888</a></p>
+                <p>Website: <a href="https://websitefoods.com">https://websitefoods.com</a></p>
+                <p>Tel: <a href="tel:0988882722">0988 882 722</a></p>
+                <p>FB: <a href="#">seafood.vietnam</a></p>
+            </div>
+            <div class="footer-column">
+                <h3>Thông Tin</h3>
+                <p><a href="#">Chính Sách Bảo Mật</a></p>
+                <p><a href="#">Chính Sách Chung</a></p>
+                <p><a href="#">Thông Tin Công Ty</a></p>
+                <h3>Bảng Giá Hải Sản</h3>
+            </div>
+            <div class="footer-column">
+                <h3>Liên Hệ</h3>
+                <ul>
+                    <li><strong>Tư vấn mua hàng:</strong> (7:30 – 22:00)</li>
+                    <li><a href="tel:02862717888">028 62 717 888</a></li>
+                    <li><strong>Đặt hàng xuất khẩu:</strong> (8:00 – 16:30)</li>
+                    <li><a href="tel:0988882722">0988 882 722</a></li>
+                    <li><strong>Hệ thống phân phối:</strong></li>
+                    <li>Call: <a href="tel:0936013983">0936 013 983</a></li>
+                    <li><strong>Thủy nguyện:</strong></li>
+                    <li>Call: <a href="tel:0933236266">0933 236 266</a></li>
+                </ul>
+                <div class="verified-badge">
+                    <img src="http://localhost:5000/uploads/verified-badge.png" alt="Đã thông báo Bộ Công Thương">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

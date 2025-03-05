@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Người Bán</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>🛠 Admin Panel</h2>
+        <ul>
+            <li data-url="../dashboard/index.html" >📊 Dashboard</li>
+            <li data-url="../seller/index.html"class="active">👨‍💼 Quản lý Người Bán</li>
+            <li data-url="../product/index.html">📦 Quản lý Sản Phẩm</li>
+            <li data-url="../order/index.html">🛒 Quản lý Đơn Hàng</li>
+            <li data-url="../user/index.html">👥 Quản lý Người Dùng</li>
+            <li data-url="../logout/index.html">🚪 Đăng xuất</li>
+        </ul>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <h1>👨‍💼 Quản lý Người Bán</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tên Người Bán</th>
+                        <th>Email</th>
+                        <th>Số Điện Thoại</th>
+                        <th>Trạng Thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Nguyễn Văn A</td>
+                        <td>nguyenvana@example.com</td>
+                        <td>0901234567</td>
+                        <td>Đang hoạt động</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Trần Thị B</td>
+                        <td>tranthib@example.com</td>
+                        <td>0909876543</td>
+                        <td>Đang tạm ngưng</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+/* Định dạng chung */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    margin: 0;
+    padding: 0;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: #2c3e50;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebar h2 {
+    text-align: center;
+    font-size: 22px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 16px;
+}
+
+.sidebar ul li:hover,
+.sidebar ul .active {
+    background: #1abc9c;
+    border-radius: 5px;
+}
+
+/* Nội dung */
+.content {
+    margin-left: 270px;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 28px;
+    color: #2c3e50;
+}
+
+/* Hồ sơ */
+.profile-container {
+    display: flex;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    align-items: flex-start;
+}
+
+/* Khu vực bên trái */
+.profile-left {
+    text-align: center;
+    margin-right: 30px;
+}
+
+.profile-picture img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #1abc9c;
+}
+
+#upload-photo {
+    display: block;
+    margin-top: 10px;
+}
+
+.seller-stats {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+.seller-stats p {
+    margin: 5px 0;
+}
+
+/* Khu vực bên phải */
+.profile-right {
+    flex: 1;
+}
+
+.profile-right label {
+    font-weight: bold;
+    display: block;
+    margin-top: 10px;
+}
+
+.profile-right input,
+.profile-right textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+}
+
+.profile-right textarea {
+    height: 60px;
+}
+
+.save-btn {
+    background: #1abc9c;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.save-btn:hover {
+    opacity: 0.8;
+}

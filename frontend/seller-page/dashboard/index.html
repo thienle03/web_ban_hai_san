@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard">
+        <div class="sidebar">
+            <h2>📦 Seller Panel</h2>
+            <ul id="menu">
+                <li data-url="../dashboard/index.html" class="active">📊 Dashboard</li>
+                <li data-url="../sell-product/index.html">📦 Sản phẩm</li>
+                <li data-url="../order/index.html">🛒 Đơn hàng</li>
+                <li data-url="../seller-profile/index.html">👤 Hồ sơ</li>
+                <li data-url="../logout/index.html">🚪 Đăng xuất</li>
+            </ul>
+        </div>
+        
+        <div class="content">
+            <h1>📊 Tổng quan kinh doanh</h1>
+            <div class="stats">
+                <div class="card">🛒 <strong>120</strong> Đơn hàng</div>
+                <div class="card">💰 <strong>25,000,000 VND</strong> Doanh thu</div>
+                <div class="card">📦 <strong>50</strong> Sản phẩm đang bán</div>
+            </div>
+            <canvas id="salesChart"></canvas>
+        </div>
+    </div>
+    <script src="chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

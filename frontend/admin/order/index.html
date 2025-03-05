@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Đơn Hàng</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="dashboard">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>🛠 Admin Panel</h2>
+        <ul>
+            <li data-url="../dashboard/index.html" >📊 Dashboard</li>
+            <li data-url="../seller/index.html">👨‍💼 Quản lý Người Bán</li>
+            <li data-url="../product/index.html">📦 Quản lý Sản Phẩm</li>
+            <li data-url="../order/index.html"class="active">🛒 Quản lý Đơn Hàng</li>
+            <li data-url="../user/index.html">👥 Quản lý Người Dùng</li>
+            <li data-url="../logout/index.html">🚪 Đăng xuất</li>
+        </ul>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+        <h1>🛒 Quản lý Đơn Hàng</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID Đơn Hàng</th>
+                        <th>Khách Hàng</th>
+                        <th>Sản Phẩm</th>
+                        <th>Tổng Tiền</th>
+                        <th>Trạng Thái</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Nguyễn Văn A</td>
+                        <td>Sản phẩm A</td>
+                        <td>500,000 VND</td>
+                        <td>Đã giao</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Trần Thị B</td>
+                        <td>Sản phẩm B</td>
+                        <td>300,000 VND</td>
+                        <td>Đang chờ xử lý</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seller - Đơn hàng</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard">
+        <div class="sidebar">
+            <h2>📦 Seller Panel</h2>
+            <ul id="menu">
+                <li data-url="../dashboard/index.html" >📊 Dashboard</li>
+                <li data-url="../sell-product/index.html">📦 Sản phẩm</li>
+                <li data-url="../order/index.html"class="active">🛒 Đơn hàng</li>
+                <li data-url="../seller-profile/index.html">👤 Hồ sơ</li>
+                <li data-url="../logout/index.html">🚪 Đăng xuất</li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <h1>🛒 Danh sách đơn hàng</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã đơn</th>
+                        <th>Khách hàng</th>
+                        <th>Sản phẩm</th>
+                        <th>Tổng tiền</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="order-list">
+                    <!-- Đơn hàng sẽ được tải động từ orders.js -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
