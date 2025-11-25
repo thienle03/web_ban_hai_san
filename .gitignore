@@ -1,0 +1,67 @@
+# =========================
+#  NODE / BACKEND
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# .env files (critical!)
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Logs
+logs
+*.log
+logs/*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage
+coverage/
+*.lcov
+
+# Build output
+dist/
+build/
+
+# Uploads (if generated dynamically)
+backend/uploads/
+uploads/
+
+# =========================
+#  FRONTEND STATIC SITE
+# =========================
+.DS_Store
+Thumbs.db
+
+# Build cache
+.cache/
+.eslintcache
+
+# Generated preview / temp
+*.tmp
+*.temp
+
+# =========================
+#  VSCODE / EDITORS
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+#  OS FILES
+# =========================
+ehthumbs.db
+Desktop.ini
+Icon?
