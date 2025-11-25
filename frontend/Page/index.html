@@ -9,71 +9,121 @@
 <body>
     <!-- Thanh điều hướng -->
     <header>
-        <h1>🐟 Hải Sản Tươi Ngon</h1>
-        <img src="image/d6b89ee4-55bc-4467-a0a7-f096fdcf589b.jpg" alt="Logo" class="logo">
-        <nav>
+        <!-- Banner quảng cáo -->
+        <div class="top-banner">
+            <img src="image/top-bar.webp" alt="Khuyến mãi Women's Day">
+        </div>
+
+        <!-- Header chính -->
+        <div class="header-main">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="image/d6b89ee4-55bc-4467-a0a7-f096fdcf589b.jpg" alt="">
+                </a>
+            </div>
+            <div class="search-bar">
+                <input type="text" id="search-bar" placeholder="Tìm kiếm trên Hải Sản Store">
+                <button onclick="search()">Tìm Kiếm</button>
+            </div>
+            <div id="search-results"></div>
+            <div class="hotline">
+                <span class="phone-number">1900 0098</span>
+                <small>(8h-21h từ T2 - Chủ Nhật)</small>
+            </div>
+        
+            <!-- Giao hàng nhanh -->
+            <div class="fast-delivery">
+                <img src="image/icons8-truck-48.png" alt="  ">
+                <span>Giao Hàng 2H</span>
+            </div>
+        
+            <!-- Đăng nhập -->
+            <div class="user-account">
+                <div class="profile-icon" onclick="redirectToProfile()">
+                    <img src="http://localhost:5000/api/user/upload-avatar" alt="Avatar" id="nav-avatar">
+                </div>
+               
+            </div>
+        
+            <!-- Giỏ hàng -->
+            <div class="cart">
+                <div class="cart-icon" onclick="toggleCart()">
+                    🛒 Giỏ Hàng (<span id="cart-count">0</span>)
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="menu-bar">
             <ul>
-                <li><a href="../Page/index.html">Danh Mục Sản Phẩm</a></li>
-                <li><a href="../gioithieu/index.html">Giới Thiệu</a></li>
-                <li><a href="../cuahang/index.html">Cửa Hàng</a></li>
-                <li><a href="../news/tintuc/index.html">Tin Tức</a></li>
+                <li>
+                    <a href="../Page/index.html">
+                        <img src="image/icons8-shopping-bag-50.png" alt="Danh mục sản phẩm">
+                        Danh Mục Sản Phẩm
+                    </a>
+                </li>
+                <li>
+                    <a href="../gioithieu/index.html">
+                        <img src="image/icons8-building-50.png" alt="Giới thiệu">
+                        Giới Thiệu
+                    </a>
+                </li>
+                <li>
+                    <a href="../cuahang/index.html">
+                        <img src="image/icons8-store-50.png" alt="Cửa hàng">
+                        Cửa Hàng
+                    </a>
+                </li>
+                <li>
+                    <a href="../news/tintuc/index.html">
+                        <img src="image/icons8-news-50.png" alt="Tin tức">
+                        Tin Tức
+                    </a>
+                </li>
             </ul>
-            <div class="cart-icon" onclick="toggleCart()">
-                🛒 Giỏ Hàng (<span id="cart-count">0</span>)
-            </div>
-            <div class="profile-icon" onclick="redirectToProfile()">
-                <img src="http://localhost:5000/uploads/default-avatar.png" alt="Avatar" id="nav-avatar">
-            </div>
-        </nav>
+        </div>    
     </header>
-
-    <!-- Section Hải Sản Mới -->
-    <section class="products">
-        <h2 class="section-title">Hải Sản Mới</h2>
-        <div class="product-list" id="new-products">
-            <!-- Sản phẩm mới sẽ được tải động từ backend -->
-        </div>
-        <div class="button-container">
-            <button class="load-more-btn" id="loadMoreNew" onclick="loadMoreProducts()">Xem thêm</button>
-            <button class="load-more-btn" id="collapseNew" onclick="collapseProducts()" style="display: none;">Thu gọn</button>
-        </div>
-    </section>
-
-    <!-- Section Sản Phẩm Nổi Bật -->
-    <section class="featured-products">
-        <h2 class="section-title">🔥 Sản Phẩm Nổi Bật</h2>
-        <div class="product-categories">
-            <button class="category" onclick="filterProducts('tom')">Tôm</button>
-            <button class="category" onclick="filterProducts('cua')">Cua</button>
-            <button class="category" onclick="filterProducts('muc')">Mực</button>
-            <button class="category" onclick="filterProducts('so')">Sò</button>
-            <button class="category" onclick="filterProducts('ca')">Cá</button>
-            <button class="category" onclick="filterProducts('all')">Tất Cả</button>
-        </div>
-        <div class="product-list" id="featured-products">
-            <div class="product" data-id="tom1" onclick="redirectToProductDetail('tom1')">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSY5MTioRkIzlLpxcSiXNFFulOr3Q5pA0BJbQ&s" alt="Tôm Càng Xanh">
-                <h3>Tôm Càng Xanh</h3>
-                <p><del>250.000 VND</del> <strong>230.000 VND</strong></p>
-                <div class="buttons">
-                    <button class="add-to-cart" onclick="addToCart('Tôm Càng Xanh', 230000, 'tom1')">🛒</button>
-                    <button class="buy-now" onclick="redirectToProductDetail('tom1')">Mua Ngay</button>
+    
+    <div class="container">
+        <div class="border-left"></div>
+    
+        <div class="main-content">
+            <!-- Section Hải Sản Mới -->
+            <section class="products">
+                <h2 class="section-title">Hải Sản Mới</h2>
+                <div class="product-list" id="new-products">
+                    <!-- Sản phẩm mới sẽ được tải động từ backend -->
                 </div>
-            </div>
-            <div class="product" data-id="cua1" onclick="redirectToProductDetail('cua1')">
-                <img src="https://haisan.online/wp-content/uploads/2021/11/cua-bien-13.jpg" alt="Cua Biển">
-                <h3>Cua Biển</h3>
-                <p><del>550.000 VND</del> <strong>500.000 VND</strong></p>
-                <div class="buttons">
-                    <button class="add-to-cart" onclick="addToCart('Cua Biển', 500000, 'cua1')">🛒</button>
-                    <button class="buy-now" onclick="redirectToProductDetail('cua1')">Mua Ngay</button>
+                <div class="button-container">
+                    <button class="load-more-btn" id="loadMoreNew" onclick="loadMoreProducts()">Xem thêm</button>
+                    <button class="load-more-btn" id="collapseNew" onclick="collapseProducts()" style="display: none;">Thu gọn</button>
                 </div>
-            </div>
-            <!-- Các sản phẩm khác giữ nguyên, chỉ cần thêm `data-id` và `onclick` tương tự -->
-        </div>
-        <button class="load-more-btn" id="loadMoreFeatured" onclick="loadMoreFeaturedProducts()">Xem thêm</button>
-    </section>
+            </section>
+    
+            <!-- Section Sản Phẩm Nổi Bật -->
+            <section class="featured-products">
+                <h2 class="section-title">🔥 Sản Phẩm Nổi Bật</h2>
+                <div class="product-categories">
+                    <button class="category" onclick="filterProducts('tom')">Tôm</button>
+                    <button class="category" onclick="filterProducts('cua')">Cua</button>
+                    <button class="category" onclick="filterProducts('muc')">Mực</button>
+                    <button class="category" onclick="filterProducts('so')">Sò</button>
+                    <button class="category" onclick="filterProducts('ca')">Cá</button>
+                    <button class="category" onclick="filterProducts('all')">Tất Cả</button>
+                </div>
+                <div class="product-list" id="featured-products">
+                    <!-- Sản phẩm nôt bật sẽ được tải động từ backend dựa trên sản phẩm có lượt mua nhiều nhất -->
+                </div>
 
+                <div class="button-container">
+                    <button class="load-more-btn" id="loadMoreFeatured" onclick="loadMoreFeaturedProducts()">Xem thêm</button>
+                    <button class="load-more-btn" id="collapseFeatured" onclick="loadMoreFeaturedProducts()">Thu gọn</button>
+                </div>  
+            </section>
+        </div>
+    
+        <div class="border-right"></div>
+    </div>
+    
     <!-- Giỏ hàng (Chỉ giữ một cart-container duy nhất) -->
     <div class="cart-container" id="cart-container" style="display: none;">
         <h3>🛒 Giỏ Hàng</h3>

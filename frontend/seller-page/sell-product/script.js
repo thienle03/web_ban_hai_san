@@ -31,14 +31,16 @@ document.addEventListener('DOMContentLoaded', function () {
         const storage = document.getElementById('productStorage').value.trim();
         const weight = document.getElementById('productWeight').value.trim();
 
-        if (!name || !price || !stock || !category) {
-            alert('Vui lòng điền đầy đủ thông tin sản phẩm!');
-            return;
-        }
-        if (isNaN(price) || isNaN(stock) || price <= 0 || stock <= 0) {
-            alert('Giá và số lượng phải là số dương!');
-            return;
-        }
+       // Kiểm tra dữ liệu nhập vào
+    if (!name || !price || !stock || !category || !name_shop || !address_shop) {
+        alert('Vui lòng điền đầy đủ thông tin sản phẩm, tên shop và địa chỉ shop!');
+        return;
+    }
+
+    if (isNaN(price) || isNaN(stock) || price <= 0 || stock <= 0) {
+        alert('Giá và số lượng phải là số dương!');
+        return;
+    }
 
         const formData = new FormData(form);
 
@@ -109,11 +111,13 @@ document.addEventListener('DOMContentLoaded', function () {
             products.forEach((product) => {
                 productList.innerHTML += `
                     <tr>
-                        <td><img src="http://localhost:5000${product.imageUrl}" alt="${product.name}" class="product-image"></td>
+                        <td><img src="${product.imageUrl}" alt="${product.name}" class="product-image"></td>
                         <td>${product.name}</td>
                         <td>${product.price.toLocaleString('vi-VN')} VND</td>
                         <td>${product.stock}</td>
                         <td>${product.category}</td>
+                        <td>${product.name_shop || 'Không có'}</td>
+                        <td>${product.address_shop || 'Không có'}</td>
                         <td>${product.origin || 'Không có'}</td>
                         <td>${product.storage || 'Không có'}</td>
                         <td>${product.weight || 'Không có'}</td>
@@ -129,8 +133,8 @@ document.addEventListener('DOMContentLoaded', function () {
             productList.innerHTML = `
                 <tr>
                     <td colspan="9" class="text-center text-red-500">
-                        Có lỗi xảy ra khi tải sản phẩm: ${error.message}
-                    </td>
+                    Có lỗi xảy ra khi tải sản phẩm: ${error.message}
+                </td>
                 </tr>
             `;
         }

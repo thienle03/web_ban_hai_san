@@ -12,6 +12,7 @@ function checkReload() {
 
 // Gọi kiểm tra khi trang tải
 checkReload();
+
 async function loadCart() {
     try {
         const response = await fetch('http://localhost:5000/api/cart', {
@@ -30,7 +31,7 @@ async function loadCart() {
                 const row = cartTable.insertRow();
                 row.innerHTML = `
                     <td>${item.productId.name}</td>
-                    <td><img src="${item.productId.image || 'https://source.unsplash.com/50x50/?seafood'}" alt="${item.productId.name}"></td>
+                    <td><img src="${item.productId.imageUrl || 'https://source.unsplash.com/50x50/?seafood'}" alt="${item.productId.name}"></td>
                     <td>${item.productId.price.toLocaleString()} VND</td>
                     <td>
                         <button onclick="changeQuantity('${item.productId._id}', -1)">➖</button>
@@ -52,8 +53,7 @@ async function loadCart() {
     }
 }
 
-// Các hàm khác giữ nguyên...
-
+// Hàm thay đổi số lượng sản phẩm
 async function changeQuantity(productId, change) {
     try {
         const response = await fetch('http://localhost:5000/api/cart', {
@@ -87,6 +87,7 @@ async function changeQuantity(productId, change) {
     }
 }
 
+// Hàm xóa sản phẩm khỏi giỏ hàng
 async function removeItem(productId) {
     try {
         const response = await fetch(`http://localhost:5000/api/cart/remove/${productId}`, {
@@ -101,6 +102,7 @@ async function removeItem(productId) {
     }
 }
 
+// Hàm xóa toàn bộ giỏ hàng
 async function clearCart() {
     try {
         const response = await fetch('http://localhost:5000/api/cart/clear', {
@@ -115,6 +117,7 @@ async function clearCart() {
     }
 }
 
+// Hàm chuyển hướng đến trang thanh toán
 async function redirectToCheckout() {
     try {
         const token = localStorage.getItem('token');
@@ -162,6 +165,7 @@ async function redirectToCheckout() {
     }
 }
 
+// Hàm cập nhật số lượng giỏ hàng
 async function updateCartCount() {
     try {
         const response = await fetch('http://localhost:5000/api/cart', {

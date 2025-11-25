@@ -9,3 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
+document.getElementById("logout-button").addEventListener("click", function () {
+    localStorage.removeItem("token"); 
+    localStorage.removeItem("userProfile"); 
+    alert("Bạn đã đăng xuất thành công!");
+    window.location.href = "../../login-page/index.html";
+});

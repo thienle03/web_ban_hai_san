@@ -23,7 +23,9 @@ async function loadUserProfile() {
 
         // Cập nhật avatar
         const avatarUrl = user.avatar
-            ? `http://localhost:5000${user.avatar}`
+            ? (user.avatar.startsWith('http') 
+                ? user.avatar // Nếu đã là URL Cloudinary, giữ nguyên
+                : `http://localhost:5000${user.avatar}`) // Nếu là đường dẫn cục bộ
             : 'http://localhost:5000/uploads/default-avatar.png'; // Fallback
         document.getElementById('nav-avatar').src = avatarUrl;
     } catch (error) {
@@ -37,13 +39,7 @@ function redirectToProfile() {
     window.location.href = '/profile/index.html'; // Đường dẫn đến trang hồ sơ
 }
 
-// Gọi khi trang tải
-document.addEventListener("DOMContentLoaded", function () {
-    loadUserProfile(); // Tải avatar
-    // Các hàm khác như loadProductDetails() hoặc 
-     
-});
-
+// Hàm tải chi tiết sản phẩm
 async function loadProductDetails() {
     try {
         if (!productId) {
@@ -56,21 +52,21 @@ async function loadProductDetails() {
         const product = await response.json();
 
         // Cập nhật thông tin sản phẩm trên trang
-        document.getElementById('product-img').src = `http://localhost:5000${product.imageUrl}`;
+        document.getElementById('product-img').src = product.imageUrl;
         document.getElementById('product-title').textContent = product.name;
         document.getElementById('product-description').textContent = product.description || 'Không có mô tả.';
         document.getElementById('product-price').textContent = `${product.price.toLocaleString()} VND/kg`;
 
         // Cập nhật các thumbnail (Ảnh 1, Ảnh 2, Ảnh 3)
         const thumbnails = document.querySelectorAll('.thumbnail');
-        if (product.imageUrl1) thumbnails[0].src = `http://localhost:5000${product.imageUrl1}`;
-        if (product.imageUrl2) thumbnails[1].src = `http://localhost:5000${product.imageUrl2}`;
-        if (product.imageUrl3) thumbnails[2].src = `http://localhost:5000${product.imageUrl3}`;
+        if (product.imageUrl1) thumbnails[0].src = product.imageUrl1;
+        if (product.imageUrl2) thumbnails[1].src = product.imageUrl2;
+        if (product.imageUrl3) thumbnails[2].src = product.imageUrl3;
 
         // Cập nhật hình ảnh minh họa
         const infoImage = document.querySelector('.info-image');
         if (product.illustrationUrl) {
-            infoImage.src = `http://localhost:5000${product.illustrationUrl}`;
+            infoImage.src = product.illustrationUrl;
         } else {
             infoImage.src = "https://source.unsplash.com/600x400/?seafood"; // Fallback nếu không có hình minh họa
         }
@@ -105,7 +101,6 @@ function redirectToProductDetail(productId) {
 function goToCart() {
     window.location.href = "../cart-page/index.html"; // Đường dẫn đến trang giỏ hàng
 }
-// Trong script.js của product-details/index.html
 
 // Thêm sản phẩm vào giỏ hàng
 async function addToCart(name, price, productId) {
@@ -150,16 +145,17 @@ async function addToCart(name, price, productId) {
         document.getElementById('cart-count').textContent = cartCount;
         
         // Tải lại trang (tùy chọn)
-         location.reload();
+        location.reload();
     } catch (error) {
         console.error('Lỗi khi thêm vào giỏ hàng:', error);
         alert(`Lỗi: ${error.message}`);
     }
 }
 
-// Cập nhật số lượng giỏ hàng khi tải trang
+// Cập nhật số lượng giỏ hàng và tải chi tiết sản phẩm khi trang tải
 document.addEventListener("DOMContentLoaded", async function () {
-    loadProductDetails();
+    loadUserProfile(); // Tải avatar
+    loadProductDetails(); // Tải chi tiết sản phẩm
     // Lấy số lượng giỏ hàng từ server
     try {
         const response = await fetch('http://localhost:5000/api/cart', {

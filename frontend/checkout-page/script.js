@@ -122,13 +122,13 @@ async function confirmOrder() {
                 'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify({
-                address: address,
                 items: items,
-                total: total,
-                paymentMethod: paymentMethod,
+                totalPrice: total,
                 customerName: name,
+                address: address,
                 phone: phone,
-                note: note
+                note: note,
+                paymentMethod: paymentMethod,
             })
         });
 
@@ -140,12 +140,12 @@ async function confirmOrder() {
         const order = await orderResponse.json();
 
         // // Xóa giỏ hàng sau khi thanh toán
-        // await fetch('http://localhost:5000/api/cart/clear', {
-        //     method: 'DELETE',
-        //     headers: { 'Authorization': 'Bearer ' + token }
-        // });
+        await fetch('http://localhost:5000/api/cart/clear', {
+            method: 'DELETE',
+            headers: { 'Authorization': 'Bearer ' + token }
+        });
 
-        // Chuyển hướng đến trang xác nhận với mã đơn hàng
+        //Chuyển hướng đến trang xác nhận với mã đơn hàng
         window.location.href = `../payment/index.html?orderId=${order.order._id}`;
     } catch (error) {
         console.error('Lỗi khi xác nhận đơn hàng:', error);

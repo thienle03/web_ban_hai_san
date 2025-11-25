@@ -7,27 +7,89 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="fixed-header">
-        <h1>🐟 Hải Sản Tươi Ngon</h1>
-        <img src="image/d6b89ee4-55bc-4467-a0a7-f096fdcf589b.jpg" alt="Logo" class="logo">
-        <nav>
-            <ul>
-                <li><a href="../Page/index.html">Danh Mục Sản Phẩm</a></li>
-                <li><a href="../gioithieu/index.html">Giới Thiệu</a></li>
-                <li><a href="../cuahang/index.html">Cửa Hàng</a></li>
-                <li><a href="../news/tintuc/index.html">Tin Tức</a></li>
-            </ul>
-            <div class="cart-icon" onclick="toggleCart()">
-                🛒 Giỏ Hàng (<span id="cart-count">0</span>)
+     <!-- Thanh điều hướng -->
+     <body>
+        <!-- Thanh điều hướng -->
+        <header>
+            <!-- Banner quảng cáo -->
+            <div class="top-banner">
+                <img src="image/top-bar.webp" alt="Khuyến mãi Women's Day">
             </div>
-            <div class="profile-icon" onclick="redirectToProfile()">
-                <img src="http://localhost:5000/uploads/default-avatar.png" alt="Avatar" id="nav-avatar">
-            </div>
+    
+            <!-- Header chính -->
+            <div class="header-main">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="image/d6b89ee4-55bc-4467-a0a7-f096fdcf589b.jpg" alt="">
+                    </a>
+                </div>
+                <div class="search-bar">
+                    <input type="text" id="search-bar" placeholder="Tìm kiếm trên Hải Sản Store">
+                    <button onclick="search()">Tìm Kiếm</button>
+                </div>
+                <div id="search-results"></div>
+                <div class="hotline">
+                    <span class="phone-number">1900 0098</span>
+                    <small>(8h-21h từ T2 - Chủ Nhật)</small>
+                </div>
             
-    </header>
+                <!-- Giao hàng nhanh -->
+                <div class="fast-delivery">
+                    <img src="image/icons8-truck-48.png" alt="  ">
+                    <span>Giao Hàng 2H</span>
+                </div>
+            
+                <!-- Đăng nhập -->
+                <div class="user-account">
+                    <div class="profile-icon" onclick="redirectToProfile()">
+                        <img src="http://localhost:5000/uploads/default-avatar.png" alt="Avatar" id="nav-avatar">
+                    </div>
+                   
+                </div>
+            
+                <!-- Giỏ hàng -->
+                <div class="cart">
+                    <div class="cart-icon" onclick="toggleCart()">
+                        🛒 Giỏ Hàng (<span id="cart-count">0</span>)
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-bar">
+                <ul>
+                    <li>
+                        <a href="../Page/index.html">
+                            <img src="image/icons8-shopping-bag-50.png" alt="Danh mục sản phẩm">
+                            Danh Mục Sản Phẩm
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../gioithieu/index.html">
+                            <img src="image/icons8-building-50.png" alt="Giới thiệu">
+                            Giới Thiệu
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../cuahang/index.html">
+                            <img src="image/icons8-store-50.png" alt="Cửa hàng">
+                            Cửa Hàng
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../news/tintuc/index.html">
+                            <img src="image/icons8-news-50.png" alt="Tin tức">
+                            Tin Tức
+                        </a>
+                    </li>
+                </ul>
+            </div>
+    
+            
+            
+        </header>
     
     <section class="about">
-        <div class="container">
+        <div class="infor">
             <h2>Vài Nét Khái Quát Về Hải Sản Miền Trung</h2>
             <p>Hải Sản Miền Trung là doanh nghiệp chuyên nhập hải sản trực tiếp từ biển Cửa Đại (Quảng Nam) và cung cấp đến tay khách hàng với chất lượng tốt nhất. </p>
             <p>Chúng tôi không chỉ đảm bảo nguồn hải sản tươi sống mà còn tạo điều kiện cho các seller đăng bán các mặt hàng trực tuyến, mang đến sự đa dạng và tiện lợi cho khách hàng.</p>
@@ -35,7 +97,7 @@
     </section>
     
     <section class="vision-mission">
-        <div class="container">
+        <div class="infor">
             <h2>Giá Trị Cốt Lõi</h2>
             <p>Chìa khóa cho sự phát triển ổn định của chúng tôi là lòng tin của khách hàng, đối tác và cộng đồng seller. </p>
             <p>Chúng tôi cam kết xây dựng một nền tảng minh bạch, uy tín và chất lượng để kết nối khách hàng với những sản phẩm hải sản tươi ngon nhất.</p>
@@ -43,7 +105,7 @@
     </section>
     
     <section class="history">
-        <div class="container">
+        <div class="infor">
             <h2>Hành Trình Phát Triển</h2>
             <p>Với hơn 20 năm kinh nghiệm trong lĩnh vực thu mua và kinh doanh hải sản, chúng tôi đã không ngừng mở rộng và phát triển hệ thống kinh doanh của mình:</p>
             <ul>
@@ -58,7 +120,7 @@
     
     
     <section class="video">
-        <div class="container">
+        <div class="infor">
             <h2>Video Giới Thiệu</h2>
             <iframe width="100%" height="400" src="https://www.youtube.com/embed/AA_6mUqGOyQ?si=OMPaZwCSovXTdXfN
             " frameborder="0" allowfullscreen></iframe>
@@ -67,7 +129,7 @@
     
 
     <section class="contact">
-        <div class="container">
+        <div class="infor">
             <h2>Liên Hệ Với Chúng Tôi</h2>
             <p>📍 Địa chỉ: Biển Cửa Đại, Quảng Nam</p>
             <p>📞 Hotline: 0987 654 321</p>

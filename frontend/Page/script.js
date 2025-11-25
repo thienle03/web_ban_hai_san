@@ -1,3 +1,4 @@
+// Khai báo biến toàn cục
 let cartCount = 0;
 let cartContainer = document.getElementById("cart-container");
 let cartCountElement = document.getElementById("cart-count");
@@ -29,7 +30,7 @@ async function loadNewProducts() {
             productDiv.setAttribute('data-id', product._id); // Thêm ID sản phẩm
             productDiv.setAttribute('onclick', `redirectToProductDetail('${product._id}')`); // Thêm sự kiện onclick
             productDiv.innerHTML = `
-                <img src="http://localhost:5000${product.imageUrl}" alt="${product.name}">
+                <img src="${product.imageUrl}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <p>Giá: ${product.price.toLocaleString()} VND/kg</p>
                 <div class="buttons">
@@ -73,7 +74,7 @@ async function loadMoreProducts() {
             productDiv.setAttribute('data-id', product._id); // Thêm ID sản phẩm
             productDiv.setAttribute('onclick', `redirectToProductDetail('${product._id}')`); // Thêm sự kiện onclick
             productDiv.innerHTML = `
-                <img src="http://localhost:5000${product.imageUrl}" alt="${product.name}">
+                <img src="${product.imageUrl}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <p>Giá: ${product.price.toLocaleString()} VND/kg</p>
                 <div class="buttons">
@@ -111,7 +112,7 @@ async function collapseProducts() {
             productDiv.setAttribute('data-id', product._id); // Thêm ID sản phẩm
             productDiv.setAttribute('onclick', `redirectToProductDetail('${product._id}')`); // Thêm sự kiện onclick
             productDiv.innerHTML = `
-                <img src="http://localhost:5000${product.imageUrl}" alt="${product.name}">
+                <img src="${product.imageUrl}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <p>Giá: ${product.price.toLocaleString()} VND/kg</p>
                 <div class="buttons">
@@ -133,23 +134,32 @@ async function collapseProducts() {
 }
 
 // Hàm tải sản phẩm nổi bật từ backend với phân trang
-async function loadMoreFeaturedProducts(page = 1) {
+async function loadMoreFeaturedProducts(category = 'all', reset = false) {
     try {
-        const response = await fetch(`http://localhost:5000/api/products/featured?page=${page}&limit=${itemsPerPageFeatured}`);
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}, message: ${await response.text()}`);
-        const { products, total } = await response.json();
+        const response = await fetch(`http://localhost:5000/api/products/featured?category=${category}&page=${currentPageFeatured}&limit=${itemsPerPageFeatured}`);
+        if (!response.ok) throw new Error(`Lỗi HTTP! status: ${response.status}, message: ${await response.text()}`);
 
+        const { products, total } = await response.json();
         const productList = document.getElementById('featured-products');
+
+        if (reset) {
+            productList.innerHTML = ""; // Xóa danh sách cũ nếu lọc mới
+            currentPageFeatured = 1; // Reset trang khi lọc
+        }
+
         products.forEach(product => {
             const productDiv = document.createElement('div');
             productDiv.className = 'product';
-            productDiv.setAttribute('data-id', product._id); // Thêm ID sản phẩm
-            productDiv.setAttribute('onclick', `redirectToProductDetail('${product._id}')`); // Thêm sự kiện onclick
+            productDiv.setAttribute('data-id', product._id);
             productDiv.setAttribute('data-category', product.category || 'all');
+            productDiv.setAttribute('onclick', `redirectToProductDetail('${product._id}')`);
+
             productDiv.innerHTML = `
-                <img src="http://localhost:5000${product.imageUrl}" alt="${product.name}">
+                <img src="${product.imageUrl}" alt="${product.name}">
                 <h3>${product.name}</h3>
                 <p><del>${(product.price + 20000).toLocaleString()} VND</del> <strong>${product.price.toLocaleString()} VND</strong></p>
+                <p><strong>Shop:</strong> ${product.name_shop || 'Không có thông tin'}</p>
+                <p><strong>Địa chỉ:</strong> ${product.address_shop || 'Không có thông tin'}</p>
                 <div class="buttons">
                     <button class="add-to-cart" onclick="addToCart('${product.name}', ${product.price}, '${product._id}')">🛒</button>
                     <button class="buy-now" onclick="redirectToProductDetail('${product._id}')">Mua Ngay</button>
@@ -158,8 +168,14 @@ async function loadMoreFeaturedProducts(page = 1) {
             productList.appendChild(productDiv);
         });
 
-        // Ẩn nút "Xem thêm" nếu không còn sản phẩm
-        document.getElementById('loadMoreFeatured').style.display = (page * itemsPerPageFeatured >= total) ? 'none' : 'block';
+        // Ẩn nút "Xem thêm" nếu đã tải hết sản phẩm
+        const loadMoreBtn = document.getElementById('loadMoreFeatured');
+        if (currentPageFeatured * itemsPerPageFeatured >= total) {
+            loadMoreBtn.style.display = 'none';
+        } else {
+            loadMoreBtn.style.display = 'block';
+            currentPageFeatured++; // Tăng số trang để load thêm sản phẩm
+        }
     } catch (error) {
         console.error('Lỗi khi tải sản phẩm nổi bật:', error);
         alert(`Lỗi khi tải sản phẩm nổi bật: ${error.message}`);
@@ -168,18 +184,13 @@ async function loadMoreFeaturedProducts(page = 1) {
 
 // Hàm lọc sản phẩm nổi bật
 function filterProducts(category) {
-    const products = document.querySelectorAll('#featured-products .product');
-    products.forEach(product => {
-        const productCategory = product.getAttribute('data-category');
-        product.style.display = (category === 'all' || productCategory === category) ? 'flex' : 'none';
-    });
+    currentPageFeatured = 1; // Reset trang khi lọc
+    loadMoreFeaturedProducts(category, true); // Reset và tải lại với category mới
 }
 
 // Hàm chuyển hướng đến trang chi tiết sản phẩm với dữ liệu
 function redirectToProductDetail(productId) {
     if (productId) {
-        // Truyền ID sản phẩm qua URL query
-        
         window.location.href = `../product-delist/index.html?id=${productId}`;
     } else {
         window.location.href = "../product-delist/index.html";
@@ -213,12 +224,11 @@ async function addToCart(name, price, productId) {
         }
 
         const data = await response.json();
-        alert(`Đã thêm ${quantity} ${name} vào giỏ hàng!`);
-        location.reload();
+        alert(`Đã thêm 1 ${name} vào giỏ hàng!`);
+        await updateCart(); // Cập nhật giỏ hàng ngay lập tức
         setTimeout(() => {
             window.location.href = '../cart-page/index.html';
-        }, 100); //
-        await updateCart(); // Cập nhật giỏ hàng ngay lập tức
+        }, 100);
     } catch (error) {
         console.error('Lỗi khi thêm vào giỏ hàng:', error);
         alert(`Lỗi: ${error.message}`);
@@ -237,7 +247,10 @@ async function updateCart() {
         }
 
         const response = await fetch('http://localhost:5000/api/cart', {
-            headers: { 'Authorization': 'Bearer ' + token }
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
         });
         if (!response.ok) throw new Error('Không thể tải giỏ hàng!');
         const cart = await response.json();
@@ -331,34 +344,61 @@ async function loadProfileAvatar() {
     const API_URL = "http://localhost:5000/api/user";
     const token = localStorage.getItem("token");
 
-    if (!token) return;
+    if (!token) {
+        console.log("Không có token, dùng default avatar");
+        document.getElementById("nav-avatar").src = "http://localhost:5000/uploads/default-avatar.png";
+        return;
+    }
 
-    try {
-        const response = await fetch(`${API_URL}/profile`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-            },
-        });
+    for (let attempt = 0; attempt < 2; attempt++) {
+        try {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 15000); // Tăng timeout lên 15 giây
 
-        const user = await response.json();
+            console.log(`Thử tải avatar lần ${attempt + 1}...`);
+            const response = await fetch(`${API_URL}/profile`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                signal: controller.signal
+            });
 
-        if (response.ok) {
-            const avatarPath = user.avatar
-                ? `http://localhost:5000${user.avatar}`
+            clearTimeout(timeoutId);
+
+            if (!response.ok) throw new Error(`Lỗi HTTP: ${response.status}`);
+
+            const user = await response.json();
+            console.log("Dữ liệu user từ server:", user); // Log để kiểm tra user.avatar
+
+            const avatarUrl = user.avatar
+                ? (user.avatar.startsWith('http') 
+                    ? user.avatar.replace(/upload\//, 'upload/w_50,h_50,c_fill/') // Resize về 50x50px và fill
+                    : `http://localhost:5000${user.avatar}`)
                 : "http://localhost:5000/uploads/default-avatar.png";
-            document.getElementById("nav-avatar").src = avatarPath;
+
+            const navAvatar = document.getElementById("nav-avatar");
+            navAvatar.src = avatarUrl;
+            navAvatar.onerror = function() {
+                console.error("Không tải được avatar, dùng default:", avatarUrl);
+                this.src = "http://localhost:5000/uploads/default-avatar.png";
+            };
+            return; // Thoát nếu thành công
+        } catch (error) {
+            console.error(`Lỗi khi tải avatar (lần ${attempt + 1}):`, error);
+            if (attempt === 1) {
+                console.error("Không thể tải avatar sau 2 lần thử, dùng default avatar");
+                document.getElementById("nav-avatar").src = "http://localhost:5000/uploads/default-avatar.png";
+            }
         }
-    } catch (error) {
-        console.error("Lỗi khi tải avatar:", error);
     }
 }
 
 // Sự kiện khi trang tải xong
 document.addEventListener("DOMContentLoaded", async function () {
     loadNewProducts(); // Tải 10 sản phẩm đầu tiên cho "Hải Sản Mới"
-    loadMoreFeaturedProducts(1); // Tải 5 sản phẩm đầu tiên cho "Sản Phẩm Nổi Bật"
+    loadMoreFeaturedProducts('all', true); // Tải 5 sản phẩm đầu tiên cho "Sản Phẩm Nổi Bật" với reset
     await updateCart(); // Tải giỏ hàng từ server
     loadProfileAvatar(); // Tải avatar
 });

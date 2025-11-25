@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", function () {
     loadProfile();
 });
-
+const controller = new AbortController();
+const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 giây
 // 🔥 API Endpoint
 const API_URL = "http://localhost:5000/api/user";
 const token = localStorage.getItem("token");
@@ -25,22 +26,28 @@ async function loadProfile() {
         const user = await response.json();
 
         if (response.ok) {
-            document.getElementById("full-name").value = user.name;
-            document.getElementById("email").value = user.email;
-            document.getElementById("phone").value = user.phone;
-            document.getElementById("address").value = user.address;
-            document.getElementById("profile-avatar").src = user.avatar 
-                ? `http://localhost:5000${user.avatar}` 
-                : "default-avatar.png";
+            document.getElementById("full-name").value = user.name || "";
+            document.getElementById("email").value = user.email || "";
+            document.getElementById("phone").value = user.phone || "";
+            document.getElementById("address").value = user.address || "";
+            // Gán trực tiếp URL từ Cloudinary
+            const avatarImg = document.getElementById("profile-avatar");
+            avatarImg.src = user.avatar || "default-avatar.png";
+            console.log("Avatar URL từ profile:", user.avatar);
 
-            // 🔹 Lưu vào localStorage (tùy chọn)
+            // Xử lý lỗi tải ảnh
+            avatarImg.onerror = function () {
+                console.error("Không tải được ảnh từ:", avatarImg.src);
+                this.src = "default-avatar.png";
+            };
+
             localStorage.setItem("userProfile", JSON.stringify(user));
         } else {
             alert(user.message || "Không thể tải hồ sơ!");
         }
     } catch (error) {
-        console.error("Lỗi khi tải hồ sơ:", error);
-        alert("Lỗi kết nối đến server!");
+        console.error("Lỗi khi tải hồ sơ:", error.message);
+        alert("Lỗi kết nối đến server: " + error.message);
     }
 }
 
@@ -66,13 +73,13 @@ async function saveProfile() {
 
         if (response.ok) {
             alert("Cập nhật thông tin thành công!");
-            localStorage.setItem("userProfile", JSON.stringify(result.user)); // Cập nhật localStorage
+            localStorage.setItem("userProfile", JSON.stringify(result.user));
         } else {
             alert(result.message || "Cập nhật thất bại!");
         }
     } catch (error) {
-        console.error("Lỗi khi cập nhật hồ sơ:", error);
-        alert("Lỗi kết nối đến server!");
+        console.error("Lỗi khi cập nhật hồ sơ:", error.message);
+        alert("Lỗi kết nối đến server: " + error.message);
     }
 }
 
@@ -85,29 +92,49 @@ document.getElementById("avatar-upload").addEventListener("change", async functi
     formData.append("avatar", file);
 
     try {
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
+    
+        console.log("Bắt đầu gửi request upload avatar...");
         const response = await fetch(`${API_URL}/upload-avatar`, {
             method: "POST",
             headers: { Authorization: `Bearer ${token}` },
             body: formData,
+            signal: controller.signal
         });
-
+    
+        console.log("Nhận được response:", response);
+        clearTimeout(timeoutId);
         const result = await response.json();
-        console.log("Avatar URL từ server:", result.avatarUrl); // Debug log
-
+        console.log("Dữ liệu trả về từ server:", result);
+    
         if (response.ok && result.avatarUrl) {
-            const avatarPath = result.avatarUrl.startsWith("/")
-                ? `http://localhost:5000${result.avatarUrl}`
-                : `http://localhost:5000/uploads/${result.avatarUrl}`;
-
-            document.getElementById("profile-avatar").src = avatarPath;
+            const avatarImg = document.getElementById("profile-avatar");
+            avatarImg.src = result.avatarUrl;
+            console.log("Cập nhật avatar URL thành công:", result.avatarUrl);
             alert("Cập nhật avatar thành công!");
+            loadProfile();
         } else {
+            console.error("Lỗi từ server:", result.message);
             alert(result.message || "Lỗi khi cập nhật avatar!");
         }
     } catch (error) {
-        console.error("Lỗi khi upload avatar:", error);
-        alert("Lỗi kết nối đến server!");
+        console.error("Lỗi chi tiết:", error);
+        if (error.name === "AbortError") {
+            console.log("Yêu cầu bị hủy do timeout.");
+            alert("Yêu cầu timeout. Vui lòng thử lại!");
+        } else {
+            console.log("Lỗi khác:", error.message);
+            //alert("Lỗi kết nối đến server: " + error.message);
+        }
+        // Kiểm tra lại profile để đảm bảo avatar được cập nhật
+        //loadProfile();
     }
 });
-
-
+// 🚀 Đăng xuất
+document.getElementById("logout-button").addEventListener("click", function () {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userProfile");
+    alert("Bạn đã đăng xuất thành công!");
+    window.location.href = "../login-page/index.html";
+  });

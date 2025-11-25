@@ -23,9 +23,12 @@
         <div class="content">
             <h1>📊 Tổng quan kinh doanh</h1>
             <div class="stats">
-                <div class="card">🛒 <strong>120</strong> Đơn hàng</div>
-                <div class="card">💰 <strong>25,000,000 VND</strong> Doanh thu</div>
-                <div class="card">📦 <strong>50</strong> Sản phẩm đang bán</div>
+                <div class="card">🛒 <strong id="total_orders">0</strong> Tổng đơn hàng</div>
+                <div class="card">⏳ <strong id="pending_orders">0</strong> Đơn chờ xác nhận</div>
+                <div class="card">🚚 <strong id="shipping_orders">0</strong> Đơn đang giao</div>
+                <div class="card">✅ <strong id="completed_orders">0</strong> Đơn đã giao</div>
+                <div class="card">💰 <strong id="totalRevenue">0 VND</strong> Doanh thu</div>
+                <div class="card">📦 <strong id="all_product">50</strong> Sản phẩm đang bán</div>
             </div>
             <canvas id="salesChart"></canvas>
         </div>

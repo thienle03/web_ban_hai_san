@@ -20,7 +20,7 @@
         </div>
 
         <div class="content">
-            <h1>🛒 Danh sách đơn hàng</h1>
+            <h1>🛒Danh Sách Đơn Hàng Đang Xử Lý</h1>
             <table>
                 <thead>
                     <tr>
@@ -32,11 +32,64 @@
                         <th>Hành động</th>
                     </tr>
                 </thead>
-                <tbody id="order-list">
+                <tbody id="order-list-1">
                     <!-- Đơn hàng sẽ được tải động từ orders.js -->
                 </tbody>
             </table>
         </div>
+
+        <div class="content">
+            <h1>🛒 Danh Sách Đơn Hàng Đang Giao </h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã đơn</th>
+                        <th>Khách hàng</th>
+                        <th>Sản phẩm</th>
+                        <th>Tổng tiền</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="order-list-2">
+                    <!-- Đơn hàng sẽ được tải động từ orders.js -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="content">
+            <h1>🛒 Danh Sách Đơn Hàng Đã Bán </h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Mã đơn</th>
+                        <th>Khách hàng</th>
+                        <th>Sản phẩm</th>
+                        <th>Tổng tiền</th>
+                        <th>Trạng thái</th>
+                        <th>Hành động</th>
+                    </tr>
+                </thead>
+                <tbody id="order-list-3">
+                    <!-- Đơn hàng sẽ được tải động từ orders.js -->
+                </tbody>
+            </table>
+        </div>
+
+        
+        <!-- Hộp thoại chi tiết đơn hàng -->
+        <div id="orderDetailModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2>Chi Tiết Đơn Hàng</h2>
+                <p><strong>Địa chỉ:</strong> <span id="orderAddress"></span></p>
+                <p><strong>Số điện thoại:</strong> <span id="orderPhone"></span></p>
+                <p><strong>Ghi chú:</strong> <span id="orderNote"></span></p>
+                <p><strong>Phương thức thanh toán:</strong> <span id="orderPayment"></span></p>
+            </div>
+        </div>
+    
+    
     </div>
     <script src="script.js"></script>
 </body>

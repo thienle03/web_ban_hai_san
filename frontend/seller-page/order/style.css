@@ -68,7 +68,27 @@ table {
     overflow: hidden;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
+    table-layout: fixed;
+    width: 100%;
 }
+
+    /* Định nghĩa độ rộng cho từng cột */
+th:nth-child(1), td:nth-child(1) { width: 20%; } /* Mã đơn */
+th:nth-child(2), td:nth-child(2) { width: 20%; } /* Khách hàng */
+th:nth-child(3), td:nth-child(3) { width: 20%; } /* Sản phẩm */
+th:nth-child(4), td:nth-child(4) { width: 15%; } /* Tổng tiền */
+th:nth-child(5), td:nth-child(5) { width: 15%; } /* Trạng thái */
+th:nth-child(6), td:nth-child(6) { width: 20%; } /* Hành động */
+
+/* Đảm bảo hành động có căn chỉnh */
+td:nth-child(6) {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Khoảng cách giữa các nút */
+    
+}
+
+
 
 th, td {
     padding: 14px;
@@ -104,6 +124,7 @@ tr:hover {
     font-weight: bold;
 }
 
+
 /* Nút thao tác */
 button {
     padding: 8px 12px;
@@ -113,6 +134,7 @@ button {
     margin-right: 5px;
     font-size: 14px;
     transition: 0.3s;
+    white-space: nowrap; /* Không cho nút xuống dòng */
 }
 
 .detail-btn {
@@ -122,6 +144,10 @@ button {
 
 .cancel-btn {
     background: #e74c3c;
+    color: white;
+}
+.confirm-btn {
+    background: green;
     color: white;
 }
 
